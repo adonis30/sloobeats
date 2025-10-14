@@ -1,3 +1,4 @@
+// src/app/(site)/mixes/page.tsx
 'use client';
 
 import MixCard from '@/components/MixCard';
