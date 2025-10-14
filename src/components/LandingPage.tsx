@@ -12,14 +12,14 @@ export default function LandingPage() {
 
         {/* Floating Card (Text + CTA) */}
         <motion.div
-          className="relative z-30 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-10 lg:p-14 max-w-3xl w-full lg:w-[55%] flex flex-col items-center lg:items-start text-center lg:text-left"
+          className="relative z-30 bg-white dark:bg-gray-800 rounded-4xl shadow-2xl p-10 lg:p-14 max-w-3xl w-full lg:w-[55%] flex flex-col items-center lg:items-start text-center lg:text-left"
           initial={{ y: 120, opacity: 0 }}
           animate={{
             y: [120, 110, 120], // subtle up-and-down floating
             opacity: 1,
           }}
           transition={{
-            duration: 4,
+            duration: 8,
             repeat: Infinity,
             repeatType: "loop",
             ease: "easeInOut",
