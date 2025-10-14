@@ -27,16 +27,16 @@ export default function Contacts() {
             <div className="flex items-center space-x-4">
               <MapPin className="w-6 h-6 text-purple-600" />
               <p className="text-gray-700 dark:text-gray-200">
-                Plot No. 7701, Lusemfwa Road, Ndola, Zambia
+                Lusaka Zambia
               </p>
             </div>
             <div className="flex items-center space-x-4">
               <Phone className="w-6 h-6 text-purple-600" />
-              <p className="text-gray-700 dark:text-gray-200">+260 971 234 567</p>
+              <p className="text-gray-700 dark:text-gray-200">+260 975 358 575</p>
             </div>
             <div className="flex items-center space-x-4">
               <Mail className="w-6 h-6 text-purple-600" />
-              <p className="text-gray-700 dark:text-gray-200">info@jaxoninvestments.com</p>
+              <p className="text-gray-700 dark:text-gray-200">djsloobeats@gmail.com</p>
             </div>
           </div>
 
