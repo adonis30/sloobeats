@@ -12,10 +12,11 @@ export default function LandingPage() {
 
         {/* Floating Card (Text + CTA) */}
         <motion.div
-          className="relative z-30 bg-white dark:bg-gray-800 rounded-4xl shadow-2xl p-10 lg:p-14 max-w-3xl w-full lg:w-[55%] flex flex-col items-center lg:items-start text-center lg:text-left"
+          className="relative z-30 rounded-[4rem] p-10 lg:p-14 max-w-3xl w-full lg:w-[55%] flex flex-col items-center lg:items-start text-center lg:text-left
+    bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]"
           initial={{ y: 120, opacity: 0 }}
           animate={{
-            y: [120, 110, 120], // subtle up-and-down floating
+            y: [120, 110, 120],
             opacity: 1,
           }}
           transition={{
@@ -41,17 +42,14 @@ export default function LandingPage() {
             events that move the crowd.
           </p>
 
-          {/* Extra Info / Features */}
           <ul className="mt-6 text-gray-600 dark:text-gray-400 text-base md:text-lg space-y-2 max-w-md list-disc list-inside">
             <li>🎵 Exclusive DJ mixes every week</li>
             <li>📅 Live events across major cities</li>
             <li>🔥 Top trending tracks curated for you</li>
           </ul>
 
-          {/* Animated Multicolor Waveform with Glow */}
+          {/* Animated Multicolor Waveform */}
           <div className="mt-8 relative flex items-end gap-1 h-14 w-full max-w-md justify-center">
-            {/* Pulsing Glow */}
-    
             {Array.from({ length: 12 }).map((_, i) => {
               const gradients = [
                 "from-pink-500 via-purple-500 to-indigo-500",
@@ -60,7 +58,6 @@ export default function LandingPage() {
                 "from-purple-400 via-pink-500 to-rose-500",
               ];
               const grad = gradients[i % gradients.length];
-
               const duration = 0.6 + Math.random() * 0.6;
               const delay = Math.random() * 0.3;
 
