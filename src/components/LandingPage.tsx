@@ -51,10 +51,7 @@ export default function LandingPage() {
           {/* Animated Multicolor Waveform with Glow */}
           <div className="mt-8 relative flex items-end gap-1 h-14 w-full max-w-md justify-center">
             {/* Pulsing Glow */}
-            <div className="absolute inset-0 flex justify-center items-end">
-              <div className="w-full h-10 bg-gradient-to-t from-purple-400 via-pink-400 to-indigo-400 opacity-20 rounded-full animate-pulse blur-xl" />
-            </div>
-
+    
             {Array.from({ length: 12 }).map((_, i) => {
               const gradients = [
                 "from-pink-500 via-purple-500 to-indigo-500",
