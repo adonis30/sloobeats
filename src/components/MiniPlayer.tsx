@@ -64,6 +64,7 @@ export default function MiniPlayer() {
             src={currentTrack.coverUrl ?? '/images/default-cover.jpg'}
             alt={currentTrack.title}
             fill
+            sizes='auto'
             className="object-cover"
           />
         </div>
@@ -120,6 +121,7 @@ export default function MiniPlayer() {
                   src={currentTrack.coverUrl ?? '/images/default-cover.jpg'}
                   alt={currentTrack.title}
                   fill
+                  sizes='auto'
                   className="object-cover"
                 />
               </div>

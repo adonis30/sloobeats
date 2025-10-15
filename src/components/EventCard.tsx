@@ -37,6 +37,7 @@ export default function EventCard({
             src={flyerUrl}
             alt={title}
             fill
+            sizes='auto'
             className="object-cover transition-transform duration-500 group-hover:scale-110"
           />
         </motion.div>

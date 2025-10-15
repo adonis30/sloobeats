@@ -58,6 +58,7 @@ export default function NowPlayingBar() {
                 src={currentTrack.coverUrl ?? '/images/default-cover.jpg'}
                 alt={currentTrack.title || 'Now Playing'}
                 fill
+                sizes='auto'
                 className="object-cover"
                 unoptimized
               />

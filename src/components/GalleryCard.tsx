@@ -32,6 +32,7 @@ export default function GalleryCard({ imageUrl, title }: GalleryCardProps) {
             src={imageUrl}
             alt={title || 'Gallery Image'}
             fill
+            sizes='auto'
             className="object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -115,6 +116,7 @@ function Lightbox({ images, index, onClose }: LightboxProps) {
               src={currentImage.imageUrl}
               alt={currentImage.title || 'Gallery Image'}
               fill
+              sizes='auto'
               className="object-contain"
             />
           </motion.div>

@@ -57,6 +57,7 @@ export default function FeaturedMixes() {
                   src={mix.image}
                   alt={mix.title}
                   fill
+                  sizes='auto'
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
 

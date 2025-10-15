@@ -27,6 +27,7 @@ export default function MixCard({ title, genre, url, coverUrl, premium }: MixCar
           src={coverUrl}
           alt={`${title} cover`}
           fill
+          sizes='auto'
           className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

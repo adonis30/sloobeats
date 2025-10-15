@@ -20,6 +20,7 @@ export default function AboutSection() {
             src="/images/sloo.jpeg"
             alt="Sloobeats performing live"
             fill
+            sizes='auto'
             className="object-cover object-center"
             priority
           />

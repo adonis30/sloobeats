@@ -106,6 +106,7 @@ export default function LandingPage() {
             src="/images/hero.jpg"
             alt="Sloobeats Hero"
             fill
+            sizes="auto"
             className="object-cover rounded-bl-[4rem] shadow-2xl"
             style={{ objectPosition: "top right" }}
             priority

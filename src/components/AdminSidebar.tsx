@@ -4,10 +4,11 @@ import Link from 'next/link';
 import { Music, Calendar, BarChart2, User } from 'lucide-react';
 
 const navItems = [
+  { name: 'Dashboard', href: '/dashboard', icon: <BarChart2 className="w-5 h-5" /> },
   { name: 'Mixes', href: '/dashboard/admin/mixes', icon: <Music className="w-5 h-5" /> },
   { name: 'Events', href: '/dashboard/admin/events', icon: <Calendar className="w-5 h-5" /> },
   { name: 'Analytics', href: '/dashboard/admin/analytics', icon: <BarChart2 className="w-5 h-5" /> },
-  { name: 'Fan Interactions', href: '/dashboard/admin/fans', icon: <User className="w-5 h-5" /> },
+  { name: 'Fan Interactions', href: '/dashboard/fan', icon: <User className="w-5 h-5" /> },
 ];
 
 export default function AdminSidebar() {

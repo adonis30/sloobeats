@@ -59,7 +59,7 @@ export default function EventModal({
         >
           {/* Shared Flyer Image */}
           <motion.div layoutId={`image-${title}`} className="relative h-72 sm:h-80 w-full">
-            <Image src={flyerUrl} alt={title} fill className="object-cover" priority />
+            <Image src={flyerUrl} alt={title} fill sizes='auto' className="object-cover" priority />
           </motion.div>
 
           {/* Light fade overlay */}
