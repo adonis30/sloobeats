@@ -6,20 +6,20 @@ const sampleMixes = [
   {
     title: 'Night Club Groove',
     genre: 'House',
-    url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', // ✅ renamed
+    url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     coverUrl: '/images/mix1.jpeg',
   },
   {
     title: 'Deep Chill Vibes',
     genre: 'Chillout',
-    url: 'https://www.youtube.com/watch?v=I9iXHAgjXhA&list=RDI9iXHAgjXhA&start_radio=1', // ✅ renamed
+    url: 'https://www.youtube.com/watch?v=I9iXHAgjXhA&list=RDI9iXHAgjXhA&start_radio=1',
     coverUrl: '/images/mix2.jpeg',
     premium: true,
   },
   {
     title: 'Festival Energy',
     genre: 'EDM',
-    url: 'https://www.youtube.com/watch?v=5fe3HZm0spk&list=RD5fe3HZm0spk&start_radio=1', // ✅ renamed
+    url: 'https://www.youtube.com/watch?v=5fe3HZm0spk&list=RD5fe3HZm0spk&start_radio=1',
     coverUrl: '/images/mix3.jpeg',
   },
 ];

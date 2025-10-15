@@ -4,6 +4,9 @@ import React from "react";
 import ReactPlayer from "react-player";
 import { Pencil, Trash } from "lucide-react";
 
+// --------------------
+// Type Definitions
+// --------------------
 type Mix = {
   id: string;
   title: string;
@@ -12,6 +15,9 @@ type Mix = {
   audioUrl: string;
 };
 
+// --------------------
+// Sample Data
+// --------------------
 const sampleMixes: Mix[] = [
   {
     id: "1",
@@ -36,12 +42,16 @@ const sampleMixes: Mix[] = [
   },
 ];
 
-export default function AdminMixes() {
+// --------------------
+// Component
+// --------------------
+export default function AdminMixes(): React.ReactElement {
   return (
     <div className="min-h-screen p-8 bg-gray-900 text-white">
       <h1 className="text-3xl font-bold mb-6">🎵 Manage Mixes</h1>
+
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {sampleMixes.map((mix) => (
+        {sampleMixes.map((mix: Mix) => (
           <div
             key={mix.id}
             className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transform transition cursor-pointer flex flex-col"
@@ -61,16 +71,24 @@ export default function AdminMixes() {
 
             {/* Audio Player */}
             <div className="mb-4">
-              <ReactPlayer {...({ url: mix.audioUrl, controls: true, width: "100%", height: "50px" })} />
+              <ReactPlayer
+                {...({ url: mix.audioUrl, controls: true, width: "100%", height: "50px" })}
+              />
             </div>
 
             {/* Action Buttons */}
             <div className="flex justify-end gap-3">
-              <button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 px-3 py-1 rounded-lg transition">
+              <button
+                type="button"
+                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 px-3 py-1 rounded-lg transition"
+              >
                 <Pencil className="w-4 h-4" />
                 Edit
               </button>
-              <button className="flex items-center gap-2 bg-red-600 hover:bg-red-500 px-3 py-1 rounded-lg transition">
+              <button
+                type="button"
+                className="flex items-center gap-2 bg-red-600 hover:bg-red-500 px-3 py-1 rounded-lg transition"
+              >
                 <Trash className="w-4 h-4" />
                 Delete
               </button>

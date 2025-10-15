@@ -16,6 +16,7 @@ import {
   Cell,
   Legend,
 } from "recharts";
+import { motion, easeOut } from "motion/react";
 
 const mixPlaysData = [
   { date: "Oct 1", plays: 120 },
@@ -37,45 +38,108 @@ const revenueData = [
   { mix: "Chill Beats", revenue: 80 },
 ];
 
-const COLORS = ["#8884d8", "#82ca9d", "#ffc658"];
+const COLORS = ["#a855f7", "#22d3ee", "#fbbf24"];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.25, delayChildren: 0.2 },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: easeOut }, // ✅ proper easing function
+  },
+};
 
 export default function AnalyticsPage() {
   return (
-    <div className="min-h-screen p-8 bg-gray-900 text-white">
-      <h1 className="text-3xl font-bold mb-6">📊 Dashboard Analytics</h1>
+    <div className="min-h-screen p-8 text-white bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800">
+      <motion.h1
+        className="text-4xl font-extrabold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: easeOut }}
+      >
+        📊 Dashboard Analytics
+      </motion.h1>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        {/* Mix Plays Line Chart */}
-        <div className="bg-gray-800 p-6 rounded-2xl shadow-lg">
-          <h2 className="text-xl font-bold mb-4">Mix Plays Over Time</h2>
+      <motion.div
+        className="grid md:grid-cols-2 gap-8"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Line Chart */}
+        <motion.div
+          variants={cardVariants}
+          whileHover={{ scale: 1.02 }}
+          className="bg-gray-900/60 border border-white/10 rounded-2xl shadow-lg backdrop-blur-md p-6"
+        >
+          <h2 className="text-xl font-semibold mb-4 text-pink-400">
+            Mix Plays Over Time
+          </h2>
           <ResponsiveContainer width="100%" height={250}>
             <LineChart data={mixPlaysData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-              <XAxis dataKey="date" stroke="#ccc" />
-              <YAxis stroke="#ccc" />
-              <Tooltip />
-              <Line type="monotone" dataKey="plays" stroke="#82ca9d" strokeWidth={3} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#333" />
+              <XAxis dataKey="date" stroke="#bbb" />
+              <YAxis stroke="#bbb" />
+              <Tooltip
+                contentStyle={{
+                  background: "#1f1f1f",
+                  borderRadius: "10px",
+                  border: "1px solid #333",
+                }}
+              />
+              <Line
+                type="monotone"
+                dataKey="plays"
+                stroke="#a855f7"
+                strokeWidth={3}
+                dot={{ fill: "#f472b6", r: 5 }}
+              />
             </LineChart>
           </ResponsiveContainer>
-        </div>
+        </motion.div>
 
-        {/* Mix Likes Bar Chart */}
-        <div className="bg-gray-800 p-6 rounded-2xl shadow-lg">
-          <h2 className="text-xl font-bold mb-4">Mix Likes</h2>
+        {/* Bar Chart */}
+        <motion.div
+          variants={cardVariants}
+          whileHover={{ scale: 1.02 }}
+          className="bg-gray-900/60 border border-white/10 rounded-2xl shadow-lg backdrop-blur-md p-6"
+        >
+          <h2 className="text-xl font-semibold mb-4 text-cyan-400">Mix Likes</h2>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={likesData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-              <XAxis dataKey="mix" stroke="#ccc" />
-              <YAxis stroke="#ccc" />
-              <Tooltip />
-              <Bar dataKey="likes" fill="#8884d8" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#333" />
+              <XAxis dataKey="mix" stroke="#bbb" />
+              <YAxis stroke="#bbb" />
+              <Tooltip
+                contentStyle={{
+                  background: "#1f1f1f",
+                  borderRadius: "10px",
+                  border: "1px solid #333",
+                }}
+              />
+              <Bar dataKey="likes" fill="#22d3ee" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
-        </div>
+        </motion.div>
 
-        {/* Revenue Pie Chart */}
-        <div className="bg-gray-800 p-6 rounded-2xl shadow-lg md:col-span-2">
-          <h2 className="text-xl font-bold mb-4">Revenue per Mix ($)</h2>
+        {/* Pie Chart */}
+        <motion.div
+          variants={cardVariants}
+          whileHover={{ scale: 1.02 }}
+          className="bg-gray-900/60 border border-white/10 rounded-2xl shadow-lg backdrop-blur-md p-6 md:col-span-2"
+        >
+          <h2 className="text-xl font-semibold mb-4 text-yellow-400">
+            Revenue per Mix ($)
+          </h2>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -85,19 +149,24 @@ export default function AnalyticsPage() {
                 cx="50%"
                 cy="50%"
                 outerRadius={100}
-                fill="#82ca9d"
                 label
               >
-                {revenueData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                {revenueData.map((_, i) => (
+                  <Cell key={i} fill={COLORS[i % COLORS.length]} />
                 ))}
               </Pie>
               <Legend />
-              <Tooltip />
+              <Tooltip
+                contentStyle={{
+                  background: "#1f1f1f",
+                  borderRadius: "10px",
+                  border: "1px solid #333",
+                }}
+              />
             </PieChart>
           </ResponsiveContainer>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

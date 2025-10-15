@@ -1,8 +1,12 @@
 'use client';
 
 import React from "react";
+import { motion } from "motion/react";
 import { User, MessageCircle, CalendarCheck } from "lucide-react";
 
+// ------------------------
+//  Types
+// ------------------------
 type Comment = {
   id: string;
   user: string;
@@ -23,6 +27,9 @@ type Follower = {
   joinedAt: string;
 };
 
+// ------------------------
+//  Mock Data
+// ------------------------
 const comments: Comment[] = [
   { id: "1", user: "Alice", text: "Loved this mix!", mixTitle: "Deep House Sunset" },
   { id: "2", user: "Bob", text: "Can't wait for the next event!", mixTitle: "Club Vibes" },
@@ -38,38 +45,91 @@ const followers: Follower[] = [
   { id: "2", name: "Frank", joinedAt: "2025-10-05" },
 ];
 
+// ------------------------
+//  Animation Variants
+// ------------------------
+const container = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeInOut" as const,
+    },
+  },
+};
+
+// ------------------------
+//  Component
+// ------------------------
 export default function FanInteractions() {
   return (
-    <div className="min-h-screen p-8 bg-gray-900 text-white">
-      <h1 className="text-3xl font-bold mb-6">👥 Fan Interactions</h1>
+    <motion.div
+      className="min-h-screen p-8 bg-gray-900 text-white"
+      initial="hidden"
+      animate="visible"
+      variants={container}
+    >
+      <motion.h1
+        className="text-3xl font-bold mb-6"
+        variants={fadeUp}
+      >
+        👥 Fan Interactions
+      </motion.h1>
 
-      {/* Comments Section */}
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+      {/* COMMENTS SECTION */}
+      <motion.section className="mb-8" variants={fadeUp}>
+        <motion.h2
+          className="text-2xl font-semibold mb-4 flex items-center gap-2"
+          variants={fadeUp}
+        >
           <MessageCircle /> Comments
-        </h2>
-        <div className="grid md:grid-cols-2 gap-4">
+        </motion.h2>
+        <motion.div
+          className="grid md:grid-cols-2 gap-4"
+          variants={container}
+        >
           {comments.map((c) => (
-            <div
+            <motion.div
               key={c.id}
+              variants={fadeUp}
               className="bg-gray-800 p-4 rounded-2xl shadow hover:scale-105 transition transform"
             >
               <p className="text-gray-300 mb-2">
-                <span className="font-semibold">{c.user}</span> on <span className="italic">{c.mixTitle}</span>
+                <span className="font-semibold">{c.user}</span> on{" "}
+                <span className="italic">{c.mixTitle}</span>
               </p>
               <p>{c.text}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      {/* RSVPs Section */}
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+      {/* RSVPS SECTION */}
+      <motion.section className="mb-8" variants={fadeUp}>
+        <motion.h2
+          className="text-2xl font-semibold mb-4 flex items-center gap-2"
+          variants={fadeUp}
+        >
           <CalendarCheck /> Event RSVPs
-        </h2>
+        </motion.h2>
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+          <motion.table
+            className="w-full text-left border-collapse"
+            variants={container}
+          >
             <thead>
               <tr className="bg-gray-700 text-gray-200">
                 <th className="p-3">User</th>
@@ -77,38 +137,55 @@ export default function FanInteractions() {
                 <th className="p-3">Status</th>
               </tr>
             </thead>
-            <tbody>
+            <motion.tbody variants={container}>
               {rsvps.map((r) => (
-                <tr key={r.id} className="border-b border-gray-600 hover:bg-gray-800 transition">
+                <motion.tr
+                  key={r.id}
+                  variants={fadeUp}
+                  className="border-b border-gray-600 hover:bg-gray-800 transition"
+                >
                   <td className="p-3">{r.user}</td>
                   <td className="p-3">{r.eventTitle}</td>
-                  <td className={`p-3 font-semibold ${r.status === "Going" ? "text-green-400" : "text-yellow-400"}`}>
+                  <td
+                    className={`p-3 font-semibold ${
+                      r.status === "Going" ? "text-green-400" : "text-yellow-400"
+                    }`}
+                  >
                     {r.status}
                   </td>
-                </tr>
+                </motion.tr>
               ))}
-            </tbody>
-          </table>
+            </motion.tbody>
+          </motion.table>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Followers Section */}
-      <section>
-        <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+      {/* FOLLOWERS SECTION */}
+      <motion.section variants={fadeUp}>
+        <motion.h2
+          className="text-2xl font-semibold mb-4 flex items-center gap-2"
+          variants={fadeUp}
+        >
           <User /> Followers
-        </h2>
-        <div className="grid md:grid-cols-2 gap-4">
+        </motion.h2>
+        <motion.div
+          className="grid md:grid-cols-2 gap-4"
+          variants={container}
+        >
           {followers.map((f) => (
-            <div
+            <motion.div
               key={f.id}
+              variants={fadeUp}
               className="bg-gray-800 p-4 rounded-2xl shadow hover:scale-105 transition transform flex justify-between items-center"
             >
               <span>{f.name}</span>
-              <span className="text-gray-400 text-sm">Joined: {f.joinedAt}</span>
-            </div>
+              <span className="text-gray-400 text-sm">
+                Joined: {f.joinedAt}
+              </span>
+            </motion.div>
           ))}
-        </div>
-      </section>
-    </div>
+        </motion.div>
+      </motion.section>
+    </motion.div>
   );
 }

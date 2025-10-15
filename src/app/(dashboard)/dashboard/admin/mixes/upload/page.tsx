@@ -1,20 +1,26 @@
 'use client';
 
 import { useState } from "react";
+import ReactPlayer from "react-player"; // ✅ normal import, works everywhere
 
 export default function UploadMix() {
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
   const [isPremium, setIsPremium] = useState(false);
   const [audioFile, setAudioFile] = useState<File | null>(null);
+  const [audioPreview, setAudioPreview] = useState<string | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) setAudioFile(e.target.files[0]);
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setAudioFile(file);
+      setAudioPreview(URL.createObjectURL(file));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement upload logic with API + Stripe for premium mixes
+    // TODO: Implement upload logic (API + database)
     console.log({ title, genre, isPremium, audioFile });
   };
 
@@ -79,9 +85,23 @@ export default function UploadMix() {
             required
           />
           {audioFile && (
-            <p className="mt-2 text-green-400 font-medium">Selected: {audioFile.name}</p>
+            <p className="mt-2 text-green-400 font-medium">
+              Selected: {audioFile.name}
+            </p>
           )}
         </div>
+
+        {/* Audio Preview */}
+        {audioPreview && (
+          <div className="mt-4">
+            <h3 className="text-lg font-semibold mb-2">Preview:</h3>
+            <audio
+              src={audioPreview}
+              controls
+              className="w-full h-12 rounded-lg bg-gray-800"
+            />
+          </div>
+        )}
 
         {/* Submit Button */}
         <button
