@@ -16,8 +16,11 @@ import {
   Cell,
   Legend,
 } from "recharts";
-import { motion, easeOut } from "motion/react";
+import { motion } from "framer-motion";
 
+// =============================
+// 📊 Sample Analytics Data
+// =============================
 const mixPlaysData = [
   { date: "Oct 1", plays: 120 },
   { date: "Oct 2", plays: 210 },
@@ -40,6 +43,9 @@ const revenueData = [
 
 const COLORS = ["#a855f7", "#22d3ee", "#fbbf24"];
 
+// =============================
+// 🎬 Motion Variants
+// =============================
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -53,22 +59,30 @@ const cardVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: easeOut }, // ✅ proper easing function
+    transition: {
+      duration: 0.8,
+      ease: "easeOut" as const, // ✅ fix type error cleanly
+    },
   },
 };
 
+// =============================
+// ⚡ Main Component
+// =============================
 export default function AnalyticsPage() {
   return (
     <div className="min-h-screen p-8 text-white bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800">
+      {/* Title */}
       <motion.h1
         className="text-4xl font-extrabold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: easeOut }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         📊 Dashboard Analytics
       </motion.h1>
 
+      {/* Chart Grid */}
       <motion.div
         className="grid md:grid-cols-2 gap-8"
         variants={containerVariants}
@@ -113,7 +127,9 @@ export default function AnalyticsPage() {
           whileHover={{ scale: 1.02 }}
           className="bg-gray-900/60 border border-white/10 rounded-2xl shadow-lg backdrop-blur-md p-6"
         >
-          <h2 className="text-xl font-semibold mb-4 text-cyan-400">Mix Likes</h2>
+          <h2 className="text-xl font-semibold mb-4 text-cyan-400">
+            Mix Likes
+          </h2>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={likesData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#333" />
