@@ -3,10 +3,27 @@
 import { usePlayer } from '@/context/PlayerContext';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { PlayIcon, PauseIcon } from '@heroicons/react/24/solid';
+import {
+  PlayIcon,
+  PauseIcon,
+  SpeakerWaveIcon,
+  SpeakerXMarkIcon,
+} from '@heroicons/react/24/solid';
 
 export default function NowPlayingBar() {
-  const { currentTrack, playing, progress, duration, togglePlay } = usePlayer();
+  const {
+    currentTrack,
+    playing,
+    progress,
+    duration,
+    muted,
+    togglePlay,
+    toggleMute,
+    seekTo,
+    skipForward,
+    skipBackward,
+    stopPlayback,
+  } = usePlayer();
 
   const progressPercent = duration ? (progress / duration) * 100 : 0;
 
@@ -14,6 +31,14 @@ export default function NowPlayingBar() {
     const m = Math.floor(secs / 60);
     const s = Math.floor(secs % 60);
     return `${m}:${s < 10 ? '0' + s : s}`;
+  };
+
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const percent = clickX / rect.width;
+    const newTime = duration * percent;
+    seekTo(newTime);
   };
 
   return (
@@ -47,7 +72,7 @@ export default function NowPlayingBar() {
           <div className="flex gap-[3px] items-center justify-center h-6 mx-auto">
             {[...Array(10)].map((_, i) => (
               <motion.div
-                key={i}
+                key={`${i}-${playing}`}
                 className="w-[3px] rounded-full bg-gradient-to-t from-pink-600 to-purple-500"
                 animate={{
                   height: playing
@@ -64,13 +89,59 @@ export default function NowPlayingBar() {
             ))}
           </div>
 
-          {/* Play / Pause Button */}
-          <button
-            onClick={togglePlay}
-            className="flex items-center justify-center bg-gradient-to-r from-pink-600 to-purple-500 p-3 rounded-full shadow-lg hover:scale-110 hover:shadow-pink-500/40 transition-transform"
-          >
-            {playing ? <PauseIcon className="w-5 h-5" /> : <PlayIcon className="w-5 h-5" />}
-          </button>
+          {/* Playback Controls */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => skipBackward(10)}
+              className="text-xs px-2 py-1 rounded hover:bg-white/10"
+              title="Skip Backward"
+            >
+              -10s
+            </button>
+
+            <button
+              onClick={togglePlay}
+              className="flex items-center justify-center bg-gradient-to-r from-pink-600 to-purple-500 p-3 rounded-full shadow-lg hover:scale-110 hover:shadow-pink-500/40 transition-transform"
+              title={playing ? 'Pause' : 'Play'}
+            >
+              {playing ? <PauseIcon className="w-5 h-5" /> : <PlayIcon className="w-5 h-5" />}
+            </button>
+
+            <button
+              onClick={() => skipForward(10)}
+              className="text-xs px-2 py-1 rounded hover:bg-white/10"
+              title="Skip Forward"
+            >
+              +10s
+            </button>
+
+            <button
+              onClick={toggleMute}
+              className="p-2 rounded hover:bg-white/10"
+              title={muted ? 'Unmute' : 'Mute'}
+            >
+              {muted ? (
+                <SpeakerXMarkIcon className="w-5 h-5 text-gray-300" />
+              ) : (
+                <SpeakerWaveIcon className="w-5 h-5 text-gray-300" />
+              )}
+            </button>
+
+            <button
+              onClick={stopPlayback}
+              className="p-2 rounded hover:bg-white/10"
+              title="Stop"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 text-gray-300"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <rect x="6" y="6" width="12" height="12" rx="2" />
+              </svg>
+            </button>
+          </div>
         </div>
       ) : (
         /* Skeleton Loader */
@@ -92,7 +163,10 @@ export default function NowPlayingBar() {
           {currentTrack ? formatTime(progress) : '--:--'}
         </span>
 
-        <div className="relative flex-1 h-2 bg-gray-700/60 rounded-full overflow-hidden">
+        <div
+          className="relative flex-1 h-2 bg-gray-700/60 rounded-full overflow-hidden cursor-pointer"
+          onClick={handleSeek}
+        >
           <div className="absolute inset-0 bg-gray-800/40" />
           {currentTrack && (
             <>

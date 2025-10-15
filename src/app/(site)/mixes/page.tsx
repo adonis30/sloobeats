@@ -12,14 +12,14 @@ const sampleMixes = [
   {
     title: 'Deep Chill Vibes',
     genre: 'Chillout',
-    url: '/audio/mix2.mp3', // ✅ renamed
+    url: 'https://www.youtube.com/watch?v=I9iXHAgjXhA&list=RDI9iXHAgjXhA&start_radio=1', // ✅ renamed
     coverUrl: '/images/mix2.jpeg',
     premium: true,
   },
   {
     title: 'Festival Energy',
     genre: 'EDM',
-    url: 'https://www.youtube.com/watch?v=oHg5SJYRHA0', // ✅ renamed
+    url: 'https://www.youtube.com/watch?v=5fe3HZm0spk&list=RD5fe3HZm0spk&start_radio=1', // ✅ renamed
     coverUrl: '/images/mix3.jpeg',
   },
 ];
