@@ -1,4 +1,3 @@
-// /(site)/layout.tsx
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NowPlayingBar from "@/components/NowPlayingBar";
@@ -15,16 +14,16 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       {/* Fixed Header */}
       <Header />
 
-      {/* Scrollable main content */}
-      <main className="flex-1 w-full max-w-7xl mx-auto pt-[5rem] pb-[6rem] px-6 md:px-12 overflow-x-hidden">
+      {/* Scrollable content */}
+      <main className="flex-1 w-full max-w-7xl mx-auto pt-[5rem] pb-[4rem] px-6 md:px-12 overflow-x-hidden">
         {children}
       </main>
-       {/* Fixed Now Playing Bar */}
-      <NowPlayingBar />
-      {/* Footer (scrolls with content) */}
+
+      {/* Footer always visible */}
       <Footer />
 
-     
+      {/* Floating player above footer */}
+      <NowPlayingBar />
     </div>
   );
 }

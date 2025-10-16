@@ -6,6 +6,7 @@ import NowPlayingBar from "@/components/NowPlayingBar";
 export const metadata = {
   title: "Sloobeats",
   description: "The best DJ in town",
+ 
 };
 
 export default function RootLayout({
@@ -21,7 +22,7 @@ export default function RootLayout({
           {children}
 
           {/* Global Now Playing bar (fixed bottom) */}
-          <NowPlayingBar />
+          {/* //<NowPlayingBar /> */}
         </PlayerProvider>
       </body>
     </html>
