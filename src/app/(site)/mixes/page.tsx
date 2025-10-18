@@ -22,6 +22,12 @@ const sampleMixes = [
     url: 'https://www.youtube.com/watch?v=5fe3HZm0spk&list=RD5fe3HZm0spk&start_radio=1',
     coverUrl: '/images/mix3.jpeg',
   },
+   {
+    title: 'Night Club Groove',
+    genre: 'Old School',
+    url: 'https://www.youtube.com/watch?v=9jK-NcRmVcw',
+    coverUrl: '/images/mix4.jpeg',
+  },
 ];
 
 export default function MixesPage() {
